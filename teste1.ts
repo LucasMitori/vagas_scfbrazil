@@ -13,6 +13,8 @@ const getUser = (req: Request, res: Response, next: NextFunction) => {
   let userFound = data.find((user) => user.id == id);
 
   if (userFound) {
+    userFound.readCount = userFound.readCount ? userFound.readCount + 1 : 1;
+
     return res.status(200).json(userFound);
   } else {
     throw new AppError("Usuário não encontrado", 404);
